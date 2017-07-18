@@ -2,9 +2,12 @@ var number_helper = require('./number_helper.js');
 var expect = require('chai').expect;
 
 describe('NumberHelper', function(){
-  before(function(){
+  beforeEach(function(){
     console.log('Setup...')
   });
+  afterEach(function(){
+    console.log('Teardown...')
+  })
 
   describe('.isOdd()', function(){
     context('when argument is odd', function(){
@@ -17,7 +20,7 @@ describe('NumberHelper', function(){
       it('return true', function(){
         result = number_helper.isOdd(1);
         // equal: Asserts that the target is strictly (===) equal to the given val.
-        expect(result).to.equal(true);
+        expect(result).to.be.true;
       });
     });
 
@@ -30,7 +33,7 @@ describe('NumberHelper', function(){
 
       it('return false', function(){
         result = number_helper.isOdd(2);
-        expect(result).to.equal(false);
+        expect(result).to.be.false;
       });
     });
   });
