@@ -1,4 +1,4 @@
-var date_helper = require('./date_helper.js');
+var dateHelper = require('./date_helper.js');
 var expect = require('chai').expect;
 var sinon = require('sinon');
 
@@ -14,7 +14,7 @@ describe('DateHelper', function(){
       });
 
       it('return true', function(){
-        expect(date_helper.todayIsMondy()).to.be.true;
+        expect(dateHelper.todayIsMondy()).to.be.true;
       });
     });
 
@@ -28,7 +28,7 @@ describe('DateHelper', function(){
       });
 
       it('return false', function(){
-        expect(date_helper.todayIsMondy()).to.be.false;
+        expect(dateHelper.todayIsMondy()).to.be.false;
       });
     })
   });
