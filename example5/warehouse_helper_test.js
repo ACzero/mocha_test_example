@@ -1,5 +1,3 @@
-// 展示的是mock的定义
-
 var warehouseHelper = require('./warehouse_helper.js');
 var expect = require('chai').expect;
 var sinon = require('sinon');
@@ -9,34 +7,36 @@ describe('WarehouseHelper', function(){
     context('warehouse has inventory', function(){
       it('get target number', function(){
         var warehouse = {
-          hasInventory: function() { return true },
-          remove: function(amount) { return amount }
+          hasEnoughInventory: function() {},
+          remove: function() {}
         };
-        var hasInventorySpy = sinon.spy(warehouse, 'hasInventory');
-        var removeSpy = sinon.spy(warehouse, 'remove');
+        var warehouseMock = sinon.mock(warehouse);
+        var expectation1 = warehouseMock.expects('hasEnoughInventory').withArgs(50).returns(true);
+        var expectation2 = warehouseMock.expects('remove').withArgs(50).returns(50);
 
-        var amount = warehouseHelper.getInventory(warehouse, 50);
+        var amount = warehouseHelper.getInventory(warehouse, 50)
 
         expect(amount).to.eql(50);
-        expect(hasInventorySpy.calledOnce).to.be.true;
-        expect(removeSpy.withArgs(50).calledOnce).to.be.true;
+        expectation1.verify();
+        expectation2.verify();
       });
     });
 
     context('warehouse do not have enough inventory', function(){
       it('get 0', function(){
         var warehouse = {
-          hasInventory: function() { return false },
+          hasEnoughInventory: function() {},
           remove: function() {}
         };
-        var hasInventorySpy = sinon.spy(warehouse, 'hasInventory');
-        var removeSpy = sinon.spy(warehouse, 'remove');
+        var warehouseMock = sinon.mock(warehouse);
+        var expectation1 = warehouseMock.expects('hasEnoughInventory').withArgs(51).returns(false);
+        var expectation2 = warehouseMock.expects('remove').never();
 
-        var amount = warehouseHelper.getInventory(warehouse, 51);
+        var amount = warehouseHelper.getInventory(warehouse, 51)
 
         expect(amount).to.eql(0);
-        expect(hasInventorySpy.calledOnce).to.be.true;
-        expect(removeSpy.notCalled).to.be.true;
+        expectation1.verify();
+        expectation2.verify();
       });
     });
   });
