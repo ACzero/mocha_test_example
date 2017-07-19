@@ -19,7 +19,6 @@ describe('NumberHelper', function(){
 
       it('return true', function(){
         result = numberHelper.isOdd(1);
-        // equal: Asserts that the target is strictly (===) equal to the given val.
         expect(result).to.be.true;
       });
     });

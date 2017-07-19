@@ -7,7 +7,7 @@ describe('DateHelper', function(){
     context('is monday now', function(){
       before(function(){
         stub_val = new Date('2017-07-17T12:00').getTime();
-        var stub = sinon.stub(Date, "now").returns(stub_val);
+        sinon.stub(Date, "now").returns(stub_val);
       });
       after(function(){
         Date.now.restore();
@@ -21,7 +21,7 @@ describe('DateHelper', function(){
     context('is not monday now', function(){
       before(function(){
         stub_val = new Date('2017-07-19T12:00').getTime();
-        var stub = sinon.stub(Date, "now").returns(stub_val);
+        sinon.stub(Date, "now").returns(stub_val);
       });
       after(function(){
         Date.now.restore();
